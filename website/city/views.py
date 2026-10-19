@@ -1,29 +1,72 @@
 from django.http import HttpResponse
 
 
+# Общее оформление и меню для всех страниц
+def page(title, content):
+    return HttpResponse(f"""
+        <!DOCTYPE html>
+        <html lang="uk">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1">
+            <title>{title} — Одеса</title>
+        </head>
+        <body>
+            <nav>
+                <a href="/">Головна</a> |
+                <a href="/news/">Новини</a> |
+                <a href="/management/">Керівництво</a> |
+                <a href="/facts/">Факти</a> |
+                <a href="/contacts/">Контакти</a> |
+                <a href="/history/">Історія</a> |
+                <a href="/history/people/">Відомі мешканці</a> |
+                <a href="/history/photos/">Історичні фото</a>
+            </nav>
+
+            <hr>
+
+            <main>
+                {content}
+            </main>
+        </body>
+        </html>
+    """)
+
+
+# Головна сторінка
 def index(request):
-    return HttpResponse("""
+    return page("Головна", """
         <h1>Одеса</h1>
         <h2>Головна</h2>
         <p>Ласкаво просимо на сайт про Одесу!</p>
         <p>Тут ви знайдете новини, цікаві факти,
         історію міста та контакти міських служб.</p>
     """)
+
+
+# Новини міста
 def news(request):
-    return HttpResponse("""
+    return page("Новини", """
         <h1>Новини Одеси</h1>
         <p>Це розділ новин міста.</p>
         <p>Тут будуть публікуватися міські новини та оголошення.</p>
     """)
+
+
+# Керівництво міста
 def management(request):
-    return HttpResponse("""
+    return page("Керівництво", """
         <h1>Керівництво міста Одеси</h1>
         <p>Цей розділ присвячений керівництву міста.</p>
         <p>Тут буде інформація про посадових осіб
         та їхні обов’язки.</p>
     """)
+
+
+# Факти про місто
 def facts(request):
-    return HttpResponse("""
+    return page("Факти", """
         <h1>Факти про Одесу</h1>
         <ul>
             <li>Одеса розташована на узбережжі Чорного моря.</li>
@@ -31,8 +74,11 @@ def facts(request):
             <li>Одна з відомих пам’яток міста — Одеський оперний театр.</li>
         </ul>
     """)
+
+
+# Контактні телефони
 def contacts(request):
-    return HttpResponse("""
+    return page("Контакти", """
         <h1>Контактні телефони міських служб</h1>
         <h2>Одеса</h2>
         <ul>
@@ -41,8 +87,11 @@ def contacts(request):
             <li>Пожежна охорона та рятувальники: 101</li>
         </ul>
     """)
+
+
+# Загальна історія міста
 def history(request):
-    return HttpResponse("""
+    return page("Історія", """
         <h1>Історія Одеси</h1>
         <p>Одеса — портове місто на узбережжі Чорного моря.</p>
         <p>У різні періоди її розвиток був пов’язаний
@@ -50,17 +99,24 @@ def history(request):
         <p>Історія міста відображена в його архітектурі,
         музеях і житті відомих мешканців.</p>
     """)
+
+
+# Відомі мешканці
 def history_people(request):
-    return HttpResponse("""
+    return page("Відомі мешканці", """
         <h1>Відомі мешканці Одеси</h1>
         <ul>
             <li>Леонід Утьосов — співак та актор, народився в Одесі.</li>
             <li>Ісаак Бабель — письменник, народився в Одесі.</li>
-            <li>Кіра Муратова — кінорежисерка, жила та працювала в Одесі.</li>
+            <li>Кіра Муратова — кінорежисерка,
+            жила та працювала в Одесі.</li>
         </ul>
     """)
+
+
+# Історичні фотографії
 def history_photos(request):
-    return HttpResponse("""
+    return page("Історичні фото", """
         <h1>Історичні фотографії Одеси</h1>
 
         <h2>Пам’ятник Дюку де Рішельє</h2>
