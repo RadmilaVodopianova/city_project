@@ -41,3 +41,41 @@ def contacts(request):
             <li>Пожежна охорона та рятувальники: 101</li>
         </ul>
     """)
+def history(request):
+    return HttpResponse("""
+        <h1>Історія Одеси</h1>
+        <p>Одеса — портове місто на узбережжі Чорного моря.</p>
+        <p>У різні періоди її розвиток був пов’язаний
+        із морською торгівлею, культурою та освітою.</p>
+        <p>Історія міста відображена в його архітектурі,
+        музеях і житті відомих мешканців.</p>
+    """)
+def history_people(request):
+    return HttpResponse("""
+        <h1>Відомі мешканці Одеси</h1>
+        <ul>
+            <li>Леонід Утьосов — співак та актор, народився в Одесі.</li>
+            <li>Ісаак Бабель — письменник, народився в Одесі.</li>
+            <li>Кіра Муратова — кінорежисерка, жила та працювала в Одесі.</li>
+        </ul>
+    """)
+def history_photos(request):
+    return HttpResponse("""
+        <h1>Історичні фотографії Одеси</h1>
+
+        <h2>Пам’ятник Дюку де Рішельє</h2>
+        <img
+            src="/static/city/images/duke_old.jpg"
+            alt="Історичний вид пам’ятника Дюку де Рішельє"
+            style="max-width: 100%; width: 700px; height: auto;"
+        >
+        <p>Джерело: old.odessa.ua.</p>
+
+        <h2>Потьомкінські сходи</h2>
+        <img
+            src="/static/city/images/stairs_old.jpg"
+            alt="Історичний вид Потьомкінських сходів"
+            style="max-width: 100%; width: 700px; height: auto;"
+        >
+        <p>Джерело: Wikimedia Commons.</p>
+    """)
