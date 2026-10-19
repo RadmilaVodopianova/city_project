@@ -11,24 +11,221 @@ def page(title, content):
             <meta name="viewport"
                   content="width=device-width, initial-scale=1">
             <title>{title} — Одеса</title>
-        </head>
-        <body>
-            <nav>
-                <a href="/">Головна</a> |
-                <a href="/news/">Новини</a> |
-                <a href="/management/">Керівництво</a> |
-                <a href="/facts/">Факти</a> |
-                <a href="/contacts/">Контакти</a> |
-                <a href="/history/">Історія</a> |
-                <a href="/history/people/">Відомі мешканці</a> |
-                <a href="/history/photos/">Історичні фото</a>
-            </nav>
 
-            <hr>
+            <style>
+                * {{
+                    box-sizing: border-box;
+                }}
+
+                body {{
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(
+        90deg,
+        #df666b 0%,
+        #f5c7c9 25%,
+        #ffffff 50%,
+        #fff0bb 75%,
+        #efc34d 100%
+    );
+    background-attachment: fixed;
+    color: #24384a;
+    font-family: Arial, sans-serif;
+    line-height: 1.7;
+}}
+
+                header {{
+                    background: #17354a;
+                    color: #fffaf0;
+                    padding: 36px 24px;
+                }}
+
+                .header-inner {{
+                    max-width: 1100px;
+                    margin: 0 auto;
+                }}
+
+                .brand {{
+                    color: #fffaf0;
+                    font-family: Georgia, serif;
+                    font-size: 42px;
+                    font-weight: bold;
+                    text-decoration: none;
+                }}
+
+                .tagline {{
+                    margin: 4px 0 0;
+                    color: #c8d9df;
+                    font-size: 15px;
+                }}
+
+                nav {{
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    margin-top: 24px;
+                }}
+
+                nav a {{
+                    padding: 9px 14px;
+                    border: 1px solid #567080;
+                    border-radius: 8px;
+                    color: #fffaf0;
+                    text-decoration: none;
+                    font-size: 14px;
+                    transition: background 0.2s, color 0.2s;
+                }}
+
+                nav a:hover,
+                nav a:focus-visible {{
+                    background: #e7c88e;
+                    color: #17354a;
+                    border-color: #e7c88e;
+                }}
+
+                main {{
+                    max-width: 1100px;
+                    margin: 36px auto;
+                    padding: 36px;
+                    background: #ffffff;
+                    border: 1px solid #e3e5e4;
+                    border-radius: 16px;
+                    box-shadow: 0 10px 30px rgba(23, 53, 74, 0.06);
+                    overflow-wrap: anywhere;
+                }}
+
+                h1, h2 {{
+                    font-family: Georgia, serif;
+                    line-height: 1.25;
+                    color: #17354a;
+                }}
+
+                h1 {{
+                    margin: 0 0 24px;
+                    font-size: clamp(30px, 5vw, 46px);
+                }}
+
+                h2 {{
+                    margin: 28px 0 14px;
+                    font-size: 26px;
+                }}
+
+                p {{
+                    margin: 14px 0;
+                }}
+
+                main a {{
+                    color: #17647a;
+                    text-underline-offset: 4px;
+                }}
+
+                main a:hover {{
+                    color: #925e1d;
+                }}
+
+                ul {{
+                    padding-left: 24px;
+                }}
+
+                li {{
+                    margin-bottom: 14px;
+                    padding-left: 5px;
+                }}
+
+                li::marker {{
+                    color: #b98740;
+                }}
+
+                article {{
+                    margin: 24px 0;
+                    padding: 24px;
+                    border-left: 4px solid #d5b77e;
+                    border-radius: 0 12px 12px 0;
+                    background: #f8f7f3;
+                }}
+
+                article h2 {{
+                    margin-top: 0;
+                }}
+
+                time {{
+                    color: #617380;
+                    font-size: 14px;
+                }}
+
+                img {{
+                    display: block;
+                    border-radius: 12px;
+                    border: 1px solid #e3e5e4;
+                    margin: 20px 0;
+                }}
+
+                hr {{
+                    margin: 30px 0;
+                    border: 0;
+                    border-top: 1px solid #e3e5e4;
+                }}
+
+                footer {{
+                    padding: 0 24px 32px;
+                    text-align: center;
+                    color: #617380;
+                    font-size: 14px;
+                }}
+
+                @media (max-width: 600px) {{
+                    header {{
+                        padding: 24px 16px;
+                    }}
+
+                    .brand {{
+                        font-size: 34px;
+                    }}
+
+                    nav a {{
+                        padding: 8px 11px;
+                    }}
+
+                    main {{
+                        margin: 20px 12px;
+                        padding: 24px 18px;
+                    }}
+
+                    article {{
+                        padding: 18px;
+                    }}
+                }}
+            </style>
+        </head>
+
+        <body>
+            <header>
+                <div class="header-inner">
+                    <a class="brand" href="/">Одеса.</a>
+                    <p class="tagline">
+                        Місто біля моря. Історії, люди та спадщина.
+                    </p>
+
+                    <nav aria-label="Головне меню">
+                        <a href="/">Головна</a>
+                        <a href="/news/">Новини</a>
+                        <a href="/management/">Голови міста</a>
+                        <a href="/facts/">Факти</a>
+                        <a href="/contacts/">Контакти</a>
+                        <a href="/history/">Історія</a>
+                        <a href="/history/people/">Відомі мешканці</a>
+                        <a href="/history/photos/">Історичні фото</a>
+                    </nav>
+                </div>
+            </header>
 
             <main>
                 {content}
             </main>
+
+            <footer>
+                Навчальний проєкт про Одесу · Django
+            </footer>
         </body>
         </html>
     """)
