@@ -1,0 +1,43 @@
+
+{% extends 'sport/base.html' %}
+
+{% block title %}Головна | SportZone{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>Ласкаво просимо до SportZone!</h1>
+    <p>Світ спорту, енергії та перемог</p>
+</section>
+
+<div class="container">
+    <div class="cards">
+
+        <div class="card">
+            <h2>⚽ Футбол</h2>
+            <p>Найпопулярніша командна гра у світі.</p>
+            <a href="{% url 'football' %}" class="btn">
+                Детальніше
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>🏒 Хокей</h2>
+            <p>Швидкість, командна робота та боротьба на льоду.</p>
+            <a href="{% url 'hockey' %}" class="btn">
+                Детальніше
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>🏀 Баскетбол</h2>
+            <p>Динамічна гра, точні кидки та яскраві емоції.</p>
+            <a href="{% url 'basketball' %}" class="btn">
+                Детальніше
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

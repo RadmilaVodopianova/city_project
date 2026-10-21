@@ -1,0 +1,38 @@
+
+{% extends 'cars/base.html' %}
+
+{% block title %}Renault | AutoWorld{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>🚙 Renault</h1>
+    <p>Французький стиль та комфорт</p>
+</section>
+
+<div class="container">
+    <div class="card">
+        <h2>Про Renault</h2>
+
+        <p>
+            Renault — французький
+            автомобільний виробник,
+            заснований у 1899 році.
+        </p>
+
+        <p>
+            Компанія пропонує практичні,
+            комфортні та технологічні
+            автомобілі для міста і подорожей.
+        </p>
+
+        <h2>Популярні моделі</h2>
+        <p>Clio • Megane • Captur • Duster</p>
+
+        <a href="{% url 'cars_home' %}" class="btn">
+            На головну
+        </a>
+    </div>
+</div>
+
+{% endblock %}

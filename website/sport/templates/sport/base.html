@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SportZone{% endblock %}</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #101827;
+            color: white;
+        }
+
+        header {
+            background: #182338;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #a3e635;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #a3e635;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 85px 20px;
+            background: linear-gradient(135deg, #172b46, #243b37);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 35px 25px;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+        }
+
+        .card h2 {
+            color: #a3e635;
+        }
+
+        .card p {
+            line-height: 1.7;
+            color: #cbd5e1;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #a3e635;
+            color: #101827;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: #bef264;
+        }
+
+        footer {
+            text-align: center;
+            background: #182338;
+            padding: 25px;
+            color: #94a3b8;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SPORTZONE</div>
+
+    <nav>
+        <a href="{% url 'sport_home' %}">Головна</a>
+        <a href="{% url 'football' %}">Футбол</a>
+        <a href="{% url 'hockey' %}">Хокей</a>
+        <a href="{% url 'basketball' %}">Баскетбол</a>
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+    © 2026 SportZone | Спортивний вебдодаток
+</footer>
+
+</body>
+</html>

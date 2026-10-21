@@ -1,0 +1,32 @@
+
+{% extends 'sport/base.html' %}
+
+{% block title %}Футбол | SportZone{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>⚽ Футбол</h1>
+    <p>Гра, яка об'єднує мільйони людей</p>
+</section>
+
+<div class="container">
+    <div class="card">
+        <h2>Про футбол</h2>
+        <p>
+            Футбол — командний вид спорту, у якому
+            дві команди по 11 гравців намагаються
+            забити м'яч у ворота суперника.
+        </p>
+        <p>
+            Матч зазвичай триває 90 хвилин.
+            Футбол є одним із найпопулярніших
+            видів спорту у світі.
+        </p>
+        <a href="{% url 'sport_home' %}" class="btn">
+            На головну
+        </a>
+    </div>
+</div>
+
+{% endblock %}

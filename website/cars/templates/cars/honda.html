@@ -1,0 +1,37 @@
+
+{% extends 'cars/base.html' %}
+
+{% block title %}Honda | AutoWorld{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>🏎️ Honda</h1>
+    <p>Технології та задоволення від керування</p>
+</section>
+
+<div class="container">
+    <div class="card">
+        <h2>Про Honda</h2>
+
+        <p>
+            Honda — японська компанія,
+            заснована у 1948 році.
+        </p>
+
+        <p>
+            Виробник відомий автомобілями,
+            мотоциклами та сучасними
+            інженерними рішеннями.
+        </p>
+
+        <h2>Популярні моделі</h2>
+        <p>Civic • Accord • CR-V • HR-V</p>
+
+        <a href="{% url 'cars_home' %}" class="btn">
+            На головну
+        </a>
+    </div>
+</div>
+
+{% endblock %}

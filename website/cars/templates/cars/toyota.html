@@ -1,0 +1,38 @@
+
+{% extends 'cars/base.html' %}
+
+{% block title %}Toyota | AutoWorld{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>🚗 Toyota</h1>
+    <p>Надійність та інновації</p>
+</section>
+
+<div class="container">
+    <div class="card">
+        <h2>Про Toyota</h2>
+
+        <p>
+            Toyota — відомий японський
+            виробник автомобілів,
+            заснований у 1937 році.
+        </p>
+
+        <p>
+            Компанія відома високою надійністю,
+            економічністю та розвитком
+            гібридних технологій.
+        </p>
+
+        <h2>Популярні моделі</h2>
+        <p>Corolla • Camry • RAV4 • Land Cruiser</p>
+
+        <a href="{% url 'cars_home' %}" class="btn">
+            На головну
+        </a>
+    </div>
+</div>
+
+{% endblock %}

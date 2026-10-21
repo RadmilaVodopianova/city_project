@@ -1,0 +1,31 @@
+
+{% extends 'sport/base.html' %}
+
+{% block title %}Баскетбол | SportZone{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>🏀 Баскетбол</h1>
+    <p>Точність, швидкість та видовищність</p>
+</section>
+
+<div class="container">
+    <div class="card">
+        <h2>Про баскетбол</h2>
+        <p>
+            Баскетбол — командна гра,
+            у якій дві команди по п'ять гравців
+            намагаються закинути м'яч у кошик суперника.
+        </p>
+        <p>
+            Баскетбол розвиває координацію,
+            швидкість реакції та командну взаємодію.
+        </p>
+        <a href="{% url 'sport_home' %}" class="btn">
+            На головну
+        </a>
+    </div>
+</div>
+
+{% endblock %}

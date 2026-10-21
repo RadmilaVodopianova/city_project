@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ day }} | День тижня</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: linear-gradient(
+                135deg,
+                {{ color }},
+                #101827
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+            padding: 60px 35px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .emoji {
+            font-size: 75px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 52px;
+            margin: 15px 0;
+        }
+
+        p {
+            font-size: 21px;
+            line-height: 1.7;
+        }
+
+        .label {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 30px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 38px;
+            }
+
+            .card {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="emoji">
+        {% if day_number == 0 %}
+            🌅
+        {% elif day_number == 1 %}
+            🌸
+        {% elif day_number == 2 %}
+            🌿
+        {% elif day_number == 3 %}
+            ☀️
+        {% elif day_number == 4 %}
+            🎉
+        {% elif day_number == 5 %}
+            🌊
+        {% else %}
+            🌙
+        {% endif %}
+    </div>
+
+    <div class="label">Сьогодні день тижня</div>
+
+    <h1>{{ day }}</h1>
+
+    <p>
+        Кожен день — це нові можливості!
+    </p>
+
+    <div class="badge">
+        Гарного тобі дня ❤️
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+{% extends 'sport/base.html' %}
+
+{% block title %}Хокей | SportZone{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>🏒 Хокей</h1>
+    <p>Швидкість, сила та командний дух</p>
+</section>
+
+<div class="container">
+    <div class="card">
+        <h2>Про хокей</h2>
+        <p>
+            Хокей із шайбою — командна спортивна
+            гра на льоду.
+        </p>
+        <p>
+            Гравці використовують ключки,
+            щоб закинути шайбу у ворота суперника.
+            Матч складається з трьох періодів
+            по 20 хвилин ігрового часу.
+        </p>
+        <a href="{% url 'sport_home' %}" class="btn">
+            На головну
+        </a>
+    </div>
+</div>
+
+{% endblock %}

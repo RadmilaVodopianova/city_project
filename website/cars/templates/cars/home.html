@@ -1,0 +1,52 @@
+
+{% extends 'cars/base.html' %}
+
+{% block title %}Головна | AutoWorld{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>Ласкаво просимо до AutoWorld!</h1>
+    <p>Світ автомобілів, технологій та швидкості</p>
+</section>
+
+<div class="container">
+    <div class="cards">
+
+        <div class="card">
+            <h2>🚗 Toyota</h2>
+            <p>
+                Японська якість, надійність
+                та сучасні технології.
+            </p>
+            <a href="{% url 'toyota' %}" class="btn">
+                Детальніше
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>🏎️ Honda</h2>
+            <p>
+                Інноваційні двигуни,
+                спортивний характер та комфорт.
+            </p>
+            <a href="{% url 'honda' %}" class="btn">
+                Детальніше
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>🚙 Renault</h2>
+            <p>
+                Французький дизайн,
+                практичність та доступність.
+            </p>
+            <a href="{% url 'renault' %}" class="btn">
+                Детальніше
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
