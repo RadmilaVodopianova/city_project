@@ -108,32 +108,64 @@
 
             <div class="widget widget_search">
                 <h3>Search</h3>
-                <form action="#">
+
+                <form action="{% url 'blog:entries' %}" method="get">
                     <input
-                        type="text"
-                        value="Search here..."
-                        onblur="if(this.value == '') { this.value = 'Search here...'; }"
-                        onfocus="if(this.value == 'Search here...') { this.value = ''; }"
+                        type="search"
+                        name="q"
+                        placeholder="Search here..."
+                        aria-label="Search posts"
                         class="text-search"
                     >
-                    <input type="submit" value="" class="submit-search">
+                    <input
+                        type="submit"
+                        value=""
+                        aria-label="Search"
+                        class="submit-search"
+                    >
                 </form>
             </div>
 
             <div class="widget widget_categories group">
                 <h3>Categories.</h3>
+
                 <ul>
-                    <li><a href="#">Wordpress</a> (2)</li>
-                    <li><a href="#">Ghost</a> (14)</li>
-                    <li><a href="#">Joomla</a> (5)</li>
-                    <li><a href="#">Drupal</a> 3</li>
-                    <li><a href="#">Magento</a> (2)</li>
-                    <li><a href="#">Uncategorized</a> (9)</li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Wordpress">
+                            Wordpress
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Ghost">
+                            Ghost
+                        </a> (3)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Joomla">
+                            Joomla
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Drupal">
+                            Drupal
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Magento">
+                            Magento
+                        </a> (0)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Uncategorized">
+                            Uncategorized
+                        </a> (0)
+                    </li>
                 </ul>
             </div>
 
             <div class="widget widget_text group">
                 <h3>Widget Text.</h3>
+
                 <p>
                     Lorem ipsum Ullamco commodo laboris sit dolore commodo
                     aliquip incididunt fugiat esse dolor aute fugiat minim
@@ -146,33 +178,30 @@
 
             <div class="widget widget_tags">
                 <h3>Post Tags.</h3>
-                <div class="tagcloud group">
-                    <a href="#">Corporate</a>
-                    <a href="#">Onepage</a>
-                    <a href="#">Agency</a>
-                    <a href="#">Multipurpose</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Landing Page</a>
-                    <a href="#">Resume</a>
-                </div>
+
+                <p>
+                    Corporate · Onepage · Agency · Multipurpose ·
+                    Blog · Landing Page · Resume
+                </p>
             </div>
 
             <div class="widget widget_popular">
                 <h3>Popular Post.</h3>
+
                 <ul class="link-list">
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Sint cillum consectetur voluptate.
+                        <a href="{% url 'blog:single' %}?post=1">
+                            Hey, We Love Open Sans!
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Lorem ipsum Ullamco commodo.
+                        <a href="{% url 'blog:single' %}?post=2">
+                            We All Love Good Typography.
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Fugiat minim eiusmod do.
+                        <a href="{% url 'blog:single' %}?post=3">
+                            White Space Everywhere.
                         </a>
                     </li>
                 </ul>

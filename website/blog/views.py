@@ -147,7 +147,22 @@ def single(request):
 
 
 def archives(request):
-    return render(request, "blog/archives.html")
+    months = {}
+
+    for post in POSTS:
+        date_parts = post["date"].split()
+        month = f"{date_parts[0]} {date_parts[-1]}"
+
+        if month not in months:
+            months[month] = []
+
+        months[month].append(post)
+
+    context = {
+        "archive_months": months,
+    }
+
+    return render(request, "blog/archives.html", context)
 
 
 def page(request):

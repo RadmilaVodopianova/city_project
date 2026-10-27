@@ -22,57 +22,27 @@
 
                 <div class="row archive-list">
                     <div class="twelve columns">
-                        <h4>Last 10 Posts.</h4>
+                        <h4>Latest Posts.</h4>
 
                         <ul>
                             <li>
-                                <a href="{% url 'blog:single' %}">
-                                    Dolor irure velit commodo cillum sit nulla
+                                <a href="{% url 'blog:single' %}?post=1">
+                                    Hey, We Love Open Sans!
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'blog:single' %}">
-                                    laborum mollit quis nostrud sed
+                                <a href="{% url 'blog:single' %}?post=2">
+                                    We All Love Good Typography.
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'blog:single' %}">
-                                    consequat occaecat fugiat in adipisicing
+                                <a href="{% url 'blog:single' %}?post=3">
+                                    White Space Everywhere.
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'blog:single' %}">
-                                    qui labore cillum sit in tempor veniam consequat
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'blog:single' %}">
-                                    quis nostrud sed sed
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'blog:single' %}">
-                                    quis proident ullamco ut dolore
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'blog:single' %}">
-                                    Dolor irure velit commodo cillum sit nulla
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'blog:single' %}">
-                                    veniam dolor dolor irure velit commodo cillum
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'blog:single' %}">
-                                    Dolor irure velit commodo cillum sit nulla
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'blog:single' %}">
-                                    voluptate enim veniam consequat occaecat
+                                <a href="{% url 'blog:single' %}?post=4">
+                                    Simple And Minimalist Designs.
                                 </a>
                             </li>
                         </ul>
@@ -82,13 +52,32 @@
                         <h4>Archives By Month.</h4>
 
                         <ul>
-                            <li><a href="#">July 2013</a></li>
-                            <li><a href="#">August 2013</a></li>
-                            <li><a href="#">September 2013</a></li>
-                            <li><a href="#">October 2013</a></li>
-                            <li><a href="#">November 2013</a></li>
-                            <li><a href="#">December 2013</a></li>
+                            {% for month, month_posts in archive_months.items %}
+                                <li>
+                                    <a href="#month-{{ forloop.counter }}">
+                                        {{ month }} ({{ month_posts|length }})
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li>No posts yet.</li>
+                            {% endfor %}
                         </ul>
+
+                        {% for month, month_posts in archive_months.items %}
+                            <section id="month-{{ forloop.counter }}">
+                                <h5>{{ month }}</h5>
+
+                                <ul>
+                                    {% for post in month_posts %}
+                                        <li>
+                                            <a href="{% url 'blog:single' %}?post={{ post.number }}">
+                                                {{ post.title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </section>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -97,12 +86,36 @@
                         <h4>Archives By Category.</h4>
 
                         <ul>
-                            <li><a href="#">Wordpress</a></li>
-                            <li><a href="#">Ghost</a></li>
-                            <li><a href="#">Joomla</a></li>
-                            <li><a href="#">Drupal</a></li>
-                            <li><a href="#">Magento</a></li>
-                            <li><a href="#">Uncategorized</a></li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Wordpress">
+                                    Wordpress
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Ghost">
+                                    Ghost
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Joomla">
+                                    Joomla
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Drupal">
+                                    Drupal
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Magento">
+                                    Magento
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Uncategorized">
+                                    Uncategorized
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
@@ -139,15 +152,21 @@
 
             <div class="widget widget_search">
                 <h3>Search</h3>
-                <form action="#">
+
+                <form action="{% url 'blog:entries' %}" method="get">
                     <input
-                        type="text"
-                        value="Search here..."
-                        onblur="if(this.value == '') { this.value = 'Search here...'; }"
-                        onfocus="if(this.value == 'Search here...') { this.value = ''; }"
+                        type="search"
+                        name="q"
+                        placeholder="Search here..."
+                        aria-label="Search posts"
                         class="text-search"
                     >
-                    <input type="submit" value="" class="submit-search">
+                    <input
+                        type="submit"
+                        value=""
+                        aria-label="Search"
+                        class="submit-search"
+                    >
                 </form>
             </div>
 
@@ -155,12 +174,36 @@
                 <h3>Categories.</h3>
 
                 <ul>
-                    <li><a href="#">Wordpress</a> (2)</li>
-                    <li><a href="#">Ghost</a> (14)</li>
-                    <li><a href="#">Joomla</a> (5)</li>
-                    <li><a href="#">Drupal</a> (3)</li>
-                    <li><a href="#">Magento</a> (2)</li>
-                    <li><a href="#">Uncategorized</a> (9)</li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Wordpress">
+                            Wordpress
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Ghost">
+                            Ghost
+                        </a> (3)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Joomla">
+                            Joomla
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Drupal">
+                            Drupal
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Magento">
+                            Magento
+                        </a> (0)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Uncategorized">
+                            Uncategorized
+                        </a> (0)
+                    </li>
                 </ul>
             </div>
 
@@ -180,15 +223,10 @@
             <div class="widget widget_tags">
                 <h3>Post Tags.</h3>
 
-                <div class="tagcloud group">
-                    <a href="#">Corporate</a>
-                    <a href="#">Onepage</a>
-                    <a href="#">Agency</a>
-                    <a href="#">Multipurpose</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Landing Page</a>
-                    <a href="#">Resume</a>
-                </div>
+                <p>
+                    Corporate · Onepage · Agency · Multipurpose ·
+                    Blog · Landing Page · Resume
+                </p>
             </div>
 
             <div class="widget widget_popular">
@@ -196,18 +234,18 @@
 
                 <ul class="link-list">
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Sint cillum consectetur voluptate.
+                        <a href="{% url 'blog:single' %}?post=1">
+                            Hey, We Love Open Sans!
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Lorem ipsum Ullamco commodo.
+                        <a href="{% url 'blog:single' %}?post=2">
+                            We All Love Good Typography.
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Fugiat minim eiusmod do.
+                        <a href="{% url 'blog:single' %}?post=3">
+                            White Space Everywhere.
                         </a>
                     </li>
                 </ul>
