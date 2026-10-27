@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 {% load static %}
 
-{% block title %}We All Love Good Typography. | Keep It Simple.{% endblock %}
+{% block title %}{{ post.title }} | Keep It Simple.{% endblock %}
 
 {% block body_class %}single{% endblock %}
 
@@ -14,19 +14,21 @@
 
                 <header class="entry-header">
                     <h2 class="entry-title">
-                        We All Love Good Typography.
+                        {{ post.title }}
                     </h2>
 
                     <div class="entry-meta">
                         <ul>
-                            <li>July 11, 2014</li>
+                            <li>{{ post.date }}</li>
                             <li class="meta-sep">&bull;</li>
                             <li>
-                                <a href="#" rel="category tag">Wordpress</a>,
-                                <a href="#" rel="category tag">Ghost</a>
+                                {% for category in post.categories %}
+                                    <a href="{% url 'blog:entries' %}?category={{ category|urlencode }}">
+                                        {{ category }}</a>{% if not forloop.last %},{% endif %}
+                                {% endfor %}
                             </li>
                             <li class="meta-sep">&bull;</li>
-                            <li>Jane Doe</li>
+                            <li>{{ post.author }}</li>
                         </ul>
                     </div>
                 </header>
@@ -53,20 +55,7 @@
                         irure consectetur.
                     </p>
 
-                    <p>
-                        Duis ex ad cupidatat tempor Excepteur cillum cupidatat
-                        fugiat nostrud cupidatat dolor sunt sint sit nisi est
-                        eu exercitation incididunt adipisicing veniam velit id
-                        fugiat enim mollit amet anim veniam dolor dolor irure
-                        velit commodo cillum sit nulla ullamco magna amet magna
-                        cupidatat qui labore cillum sit in tempor veniam
-                        consequat non laborum adipisicing aliqua ea nisi sint
-                        ut quis proident ullamco ut dolore culpa occaecat ut
-                        laboris in sit minim cupidatat ut dolor voluptate enim
-                        veniam consequat occaecat fugiat in adipisicing in amet
-                        Ut nulla nisi non ut enim aliqua laborum mollit quis
-                        nostrud sed sed.
-                    </p>
+                    <p>{{ post.text }}</p>
 
                     <p>
                         Lorem ipsum Nisi enim est proident est magna occaecat
@@ -90,20 +79,36 @@
                 </p>
 
                 <ul class="post-nav group">
-                    <li class="prev">
-                        <a rel="prev" href="#">
-                            <strong>Previous Article</strong>
-                            Duis Sed Odio Sit Amet Nibh Vulputate
-                        </a>
-                    </li>
-                    <li class="next">
-                        <a rel="next" href="#">
-                            <strong>Next Article</strong>
-                            Morbi Elit Consequat Ipsum
-                        </a>
-                    </li>
+                    {% if previous_post %}
+                        <li class="prev">
+                            <a
+                                rel="prev"
+                                href="{% url 'blog:single' %}?post={{ previous_post.number }}"
+                            >
+                                <strong>Previous Article</strong>
+                                {{ previous_post.title }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if next_post %}
+                        <li class="next">
+                            <a
+                                rel="next"
+                                href="{% url 'blog:single' %}?post={{ next_post.number }}"
+                            >
+                                <strong>Next Article</strong>
+                                {{ next_post.title }}
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
 
+                <p>
+                    <a href="{% url 'blog:entries' %}">
+                        ← All posts
+                    </a>
+                </p>
             </article>
 
             <div id="comments">
@@ -307,11 +312,14 @@
                 <div class="respond" id="respond">
                     <h3>Leave a Comment</h3>
 
-                    <form name="contactForm"
-                          id="contactForm"
-                          method="post"
-                          action="{% url 'blog:single' %}">
+                    <form
+                        name="contactForm"
+                        id="contactForm"
+                        method="post"
+                        action="{% url 'blog:single' %}?post={{ post.number }}"
+                    >
                         {% csrf_token %}
+
                         <fieldset>
                             <div class="group">
                                 <label for="cName">
@@ -347,40 +355,72 @@
                         </fieldset>
                     </form>
                 </div>
-
             </div>
+
         </div>
 
         <div id="sidebar" class="four columns">
 
             <div class="widget widget_search">
                 <h3>Search</h3>
-                <form action="#">
+
+                <form action="{% url 'blog:entries' %}" method="get">
                     <input
-                        type="text"
-                        value="Search here..."
-                        onblur="if(this.value == '') { this.value = 'Search here...'; }"
-                        onfocus="if(this.value == 'Search here...') { this.value = ''; }"
+                        type="search"
+                        name="q"
+                        placeholder="Search here..."
+                        aria-label="Search posts"
                         class="text-search"
                     >
-                    <input type="submit" value="" class="submit-search">
+                    <input
+                        type="submit"
+                        value=""
+                        aria-label="Search"
+                        class="submit-search"
+                    >
                 </form>
             </div>
 
             <div class="widget widget_categories group">
                 <h3>Categories.</h3>
+
                 <ul>
-                    <li><a href="#">Wordpress</a> (2)</li>
-                    <li><a href="#">Ghost</a> (14)</li>
-                    <li><a href="#">Joomla</a> (5)</li>
-                    <li><a href="#">Drupal</a> (3)</li>
-                    <li><a href="#">Magento</a> (2)</li>
-                    <li><a href="#">Uncategorized</a> (9)</li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Wordpress">
+                            Wordpress
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Ghost">
+                            Ghost
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Joomla">
+                            Joomla
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Drupal">
+                            Drupal
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Magento">
+                            Magento
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Uncategorized">
+                            Uncategorized
+                        </a>
+                    </li>
                 </ul>
             </div>
 
             <div class="widget widget_text group">
                 <h3>Widget Text.</h3>
+
                 <p>
                     Lorem ipsum Ullamco commodo laboris sit dolore commodo
                     aliquip incididunt fugiat esse dolor aute fugiat minim
@@ -393,6 +433,7 @@
 
             <div class="widget widget_tags">
                 <h3>Post Tags.</h3>
+
                 <div class="tagcloud group">
                     <a href="#">Corporate</a>
                     <a href="#">Onepage</a>
@@ -406,10 +447,23 @@
 
             <div class="widget widget_popular">
                 <h3>Popular Post.</h3>
+
                 <ul class="link-list">
-                    <li><a href="#">Sint cillum consectetur voluptate.</a></li>
-                    <li><a href="#">Lorem ipsum Ullamco commodo.</a></li>
-                    <li><a href="#">Fugiat minim eiusmod do.</a></li>
+                    <li>
+                        <a href="{% url 'blog:single' %}?post=1">
+                            Hey, We Love Open Sans!
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:single' %}?post=2">
+                            We All Love Good Typography.
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:single' %}?post=3">
+                            White Space Everywhere.
+                        </a>
+                    </li>
                 </ul>
             </div>
 

@@ -8,168 +8,98 @@
 
         <div id="main" class="eight columns">
 
-            <article class="entry">
-                <header class="entry-header">
-                    <h2 class="entry-title">
-                        <a href="{% url 'blog:single' %}">
-                            Hey, We Love Open Sans!
-                        </a>
-                    </h2>
+            {% if query or selected_category %}
+                <div class="widget">
+                    {% if query %}
+                        <p>
+                            Search: <strong>{{ query }}</strong>
+                        </p>
+                    {% endif %}
 
-                    <div class="entry-meta">
-                        <ul>
-                            <li>July 12, 2014</li>
-                            <li class="meta-sep">&bull;</li>
-                            <li>
-                                <a href="#" rel="category tag">Ghost</a>
-                            </li>
-                            <li class="meta-sep">&bull;</li>
-                            <li>John Doe</li>
-                        </ul>
-                    </div>
-                </header>
+                    {% if selected_category %}
+                        <p>
+                            Category:
+                            <strong>{{ selected_category }}</strong>
+                        </p>
+                    {% endif %}
 
-                <div class="entry-content">
                     <p>
-                        Duis ex ad cupidatat tempor Excepteur cillum cupidatat
-                        fugiat nostrud cupidatat dolor sunt sint sit nisi est
-                        eu exercitation incididunt adipisicing veniam velit id
-                        fugiat enim mollit amet anim veniam dolor dolor irure
-                        velit commodo cillum sit nulla ullamco magna amet magna
-                        cupidatat qui labore cillum sit in tempor veniam
-                        consequat non laborum adipisicing aliqua ea nisi sint
-                        ut quis proident ullamco ut dolore culpa occaecat ut
-                        laboris in sit minim cupidatat ut dolor voluptate enim
-                        veniam consequat occaecat fugiat in adipisicing in amet
-                        Ut nulla nisi non ut enim aliqua laborum mollit quis
-                        nostrud sed sed.
+                        Found: {{ page_obj.paginator.count }}
+                        &middot;
+                        <a href="{% url 'blog:entries' %}">
+                            Show all posts
+                        </a>
                     </p>
                 </div>
-            </article>
+            {% endif %}
 
-            <article class="entry">
-                <header class="entry-header">
-                    <h2 class="entry-title">
-                        <a href="{% url 'blog:single' %}">
-                            We All Love Good Typography.
-                        </a>
-                    </h2>
+            {% for post in posts %}
+                <article class="entry">
+                    <header class="entry-header">
+                        <h2 class="entry-title">
+                            <a href="{% url 'blog:single' %}?post={{ post.number }}">
+                                {{ post.title }}
+                            </a>
+                        </h2>
 
-                    <div class="entry-meta">
-                        <ul>
-                            <li>July 11, 2014</li>
-                            <li class="meta-sep">&bull;</li>
-                            <li>
-                                <a href="#" rel="category tag">Wordpress</a>,
-                                <a href="#" rel="category tag">Ghost</a>
-                            </li>
-                            <li class="meta-sep">&bull;</li>
-                            <li>Jane Doe</li>
-                        </ul>
+                        <div class="entry-meta">
+                            <ul>
+                                <li>{{ post.date }}</li>
+                                <li class="meta-sep">&bull;</li>
+                                <li>
+                                    {% for category in post.categories %}
+                                        <a href="{% url 'blog:entries' %}?category={{ category|urlencode }}">
+                                            {{ category }}</a>{% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                                </li>
+                                <li class="meta-sep">&bull;</li>
+                                <li>{{ post.author }}</li>
+                            </ul>
+                        </div>
+                    </header>
+
+                    <div class="entry-content">
+                        <p>{{ post.text }}</p>
                     </div>
-                </header>
-
-                <div class="entry-content">
+                </article>
+            {% empty %}
+                <section class="page">
+                    <h2>No posts found.</h2>
                     <p>
-                        Duis ex ad cupidatat tempor Excepteur cillum cupidatat
-                        fugiat nostrud cupidatat dolor sunt sint sit nisi est
-                        eu exercitation incididunt adipisicing veniam velit id
-                        fugiat enim mollit amet anim veniam dolor dolor irure
-                        velit commodo cillum sit nulla ullamco magna amet magna
-                        cupidatat qui labore cillum sit in tempor veniam
-                        consequat non laborum adipisicing aliqua ea nisi sint
-                        ut quis proident ullamco ut dolore culpa occaecat ut
-                        laboris in sit minim cupidatat ut dolor voluptate enim
-                        veniam consequat occaecat fugiat in.
+                        Try another search or select a different category.
+                    </p>
+                    <p>
+                        <a href="{% url 'blog:entries' %}">
+                            Show all posts
+                        </a>
+                    </p>
+                </section>
+            {% endfor %}
+
+            {% if page_obj.has_other_pages %}
+                <div class="pagenav">
+                    <p>
+                        {% if page_obj.has_previous %}
+                            <a
+                                rel="prev"
+                                href="{% url 'blog:entries' %}?page={{ page_obj.previous_page_number }}&amp;q={{ query|urlencode }}&amp;category={{ selected_category|urlencode }}"
+                            >Prev</a>
+                        {% endif %}
+
+                        <span>
+                            Page {{ page_obj.number }}
+                            of {{ page_obj.paginator.num_pages }}
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a
+                                rel="next"
+                                href="{% url 'blog:entries' %}?page={{ page_obj.next_page_number }}&amp;q={{ query|urlencode }}&amp;category={{ selected_category|urlencode }}"
+                            >Next</a>
+                        {% endif %}
                     </p>
                 </div>
-            </article>
-
-            <article class="entry">
-                <header class="entry-header">
-                    <h2 class="entry-title">
-                        <a href="{% url 'blog:single' %}">
-                            White Space Everywhere.
-                        </a>
-                    </h2>
-
-                    <div class="entry-meta">
-                        <ul>
-                            <li>July 10, 2014</li>
-                            <li class="meta-sep">&bull;</li>
-                            <li>
-                                <a href="#" rel="category tag">Joomla</a>,
-                                <a href="#" rel="category tag">Drupal</a>
-                            </li>
-                            <li class="meta-sep">&bull;</li>
-                            <li>Naruto Uzumaki</li>
-                        </ul>
-                    </div>
-                </header>
-
-                <div class="entry-content">
-                    <p>
-                        Duis ex ad cupidatat tempor Excepteur cillum cupidatat
-                        fugiat nostrud cupidatat dolor sunt sint sit nisi est
-                        eu exercitation incididunt adipisicing veniam velit id
-                        fugiat enim mollit amet anim veniam dolor dolor irure
-                        velit commodo cillum sit nulla ullamco magna amet magna
-                        cupidatat qui labore cillum sit in tempor veniam
-                        consequat non laborum adipisicing aliqua ea nisi sint
-                        ut quis proident ullamco ut dolore culpa occaecat ut
-                        laboris in sit minim cupidatat ut dolor voluptate enim
-                        veniam consequat occaecat fugiat in adipisicing in amet
-                        Ut nulla nisi non ut enim aliqua laborum mollit quis
-                        nostrud sed sed.
-                    </p>
-                </div>
-            </article>
-
-            <article class="entry">
-                <header class="entry-header">
-                    <h2 class="entry-title">
-                        <a href="{% url 'blog:single' %}">
-                            Simple And Minimalist Designs.
-                        </a>
-                    </h2>
-
-                    <div class="entry-meta">
-                        <ul>
-                            <li>July 09, 2014</li>
-                            <li class="meta-sep">&bull;</li>
-                            <li>
-                                <a href="#" rel="category tag">Ghost</a>
-                            </li>
-                            <li class="meta-sep">&bull;</li>
-                            <li>Naruto Uzumaki</li>
-                        </ul>
-                    </div>
-                </header>
-
-                <div class="entry-content">
-                    <p>
-                        Duis ex ad cupidatat tempor Excepteur cillum cupidatat
-                        fugiat nostrud cupidatat dolor sunt sint sit nisi est
-                        eu exercitation incididunt adipisicing veniam velit id
-                        fugiat enim mollit amet anim veniam dolor dolor irure
-                        velit commodo cillum sit nulla ullamco magna amet magna
-                        cupidatat qui labore cillum sit in tempor veniam
-                        consequat non laborum adipisicing aliqua ea nisi sint
-                        ut quis proident ullamco ut dolore culpa occaecat ut
-                        laboris in sit minim cupidatat ut dolor voluptate enim
-                        veniam consequat occaecat fugiat in adipisicing in amet
-                        Ut nulla nisi non ut enim aliqua laborum mollit quis
-                        nostrud sed sed.
-                    </p>
-                </div>
-            </article>
-
-            <div class="pagenav">
-                <p>
-                    <a rel="prev" href="#">Prev</a>
-                    <a rel="next" href="#">Next</a>
-                </p>
-            </div>
+            {% endif %}
 
         </div>
 
@@ -177,32 +107,62 @@
 
             <div class="widget widget_search">
                 <h3>Search</h3>
-                <form action="#">
+
+                <form action="{% url 'blog:entries' %}" method="get">
+                    {% if selected_category %}
+                        <input
+                            type="hidden"
+                            name="category"
+                            value="{{ selected_category }}"
+                        >
+                    {% endif %}
+
                     <input
-                        type="text"
-                        value="Search here..."
-                        onblur="if(this.value == '') { this.value = 'Search here...'; }"
-                        onfocus="if(this.value == 'Search here...') { this.value = ''; }"
+                        type="search"
+                        name="q"
+                        value="{{ query }}"
+                        placeholder="Search here..."
+                        aria-label="Search posts"
                         class="text-search"
                     >
-                    <input type="submit" value="" class="submit-search">
+
+                    <input
+                        type="submit"
+                        value=""
+                        aria-label="Search"
+                        class="submit-search"
+                    >
                 </form>
             </div>
 
             <div class="widget widget_categories group">
                 <h3>Categories.</h3>
+
                 <ul>
-                    <li><a href="#">Wordpress</a> (2)</li>
-                    <li><a href="#">Ghost</a> (14)</li>
-                    <li><a href="#">Joomla</a> (5)</li>
-                    <li><a href="#">Drupal</a> (3)</li>
-                    <li><a href="#">Magento</a> (2)</li>
-                    <li><a href="#">Uncategorized</a> (9)</li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?q={{ query|urlencode }}">
+                            All categories
+                        </a>
+                    </li>
+
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% url 'blog:entries' %}?category={{ category.name|urlencode }}&amp;q={{ query|urlencode }}">
+                                {% if selected_category == category.name %}
+                                    <strong>{{ category.name }}</strong>
+                                {% else %}
+                                    {{ category.name }}
+                                {% endif %}
+                            </a>
+                            ({{ category.count }})
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
 
             <div class="widget widget_text group">
                 <h3>Widget Text.</h3>
+
                 <p>
                     Lorem ipsum Ullamco commodo laboris sit dolore commodo
                     aliquip incididunt fugiat esse dolor aute fugiat minim
@@ -215,6 +175,7 @@
 
             <div class="widget widget_tags">
                 <h3>Post Tags.</h3>
+
                 <div class="tagcloud group">
                     <a href="#">Corporate</a>
                     <a href="#">Onepage</a>
@@ -228,6 +189,7 @@
 
             <div class="widget widget_popular">
                 <h3>Popular Post.</h3>
+
                 <ul class="link-list">
                     <li>
                         <a href="{% url 'blog:single' %}">

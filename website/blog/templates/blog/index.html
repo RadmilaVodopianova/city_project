@@ -8,7 +8,7 @@
             <article class="entry">
                 <header class="entry-header">
                     <h2 class="entry-title">
-                        <a href="{% url 'blog:single' %}">
+                        <a href="{% url 'blog:single' %}?post=1">
                             Hey, We Love Open Sans!
                         </a>
                     </h2>
@@ -17,7 +17,11 @@
                         <ul>
                             <li>July 12, 2014</li>
                             <li>&bull;</li>
-                            <li>Ghost</li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Ghost">
+                                    Ghost
+                                </a>
+                            </li>
                             <li>&bull;</li>
                             <li>John Doe</li>
                         </ul>
@@ -46,7 +50,7 @@
             <article class="entry">
                 <header class="entry-header">
                     <h2 class="entry-title">
-                        <a href="{% url 'blog:single' %}">
+                        <a href="{% url 'blog:single' %}?post=2">
                             We All Love Good Typography.
                         </a>
                     </h2>
@@ -55,7 +59,13 @@
                         <ul>
                             <li>July 11, 2014</li>
                             <li>&bull;</li>
-                            <li>Wordpress, Ghost</li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Wordpress">
+                                    Wordpress</a>,
+                                <a href="{% url 'blog:entries' %}?category=Ghost">
+                                    Ghost
+                                </a>
+                            </li>
                             <li>&bull;</li>
                             <li>Jane Doe</li>
                         </ul>
@@ -83,7 +93,7 @@
             <article class="entry">
                 <header class="entry-header">
                     <h2 class="entry-title">
-                        <a href="{% url 'blog:single' %}">
+                        <a href="{% url 'blog:single' %}?post=3">
                             White Space Everywhere.
                         </a>
                     </h2>
@@ -92,7 +102,13 @@
                         <ul>
                             <li>July 10, 2014</li>
                             <li>&bull;</li>
-                            <li>Joomla, Drupal</li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Joomla">
+                                    Joomla</a>,
+                                <a href="{% url 'blog:entries' %}?category=Drupal">
+                                    Drupal
+                                </a>
+                            </li>
                             <li>&bull;</li>
                             <li>Naruto Uzumaki</li>
                         </ul>
@@ -121,7 +137,7 @@
             <article class="entry">
                 <header class="entry-header">
                     <h2 class="entry-title">
-                        <a href="{% url 'blog:single' %}">
+                        <a href="{% url 'blog:single' %}?post=4">
                             Simple And Minimalist Designs.
                         </a>
                     </h2>
@@ -130,7 +146,11 @@
                         <ul>
                             <li>July 09, 2014</li>
                             <li>&bull;</li>
-                            <li>Ghost</li>
+                            <li>
+                                <a href="{% url 'blog:entries' %}?category=Ghost">
+                                    Ghost
+                                </a>
+                            </li>
                             <li>&bull;</li>
                             <li>Naruto Uzumaki</li>
                         </ul>
@@ -163,12 +183,36 @@
             <div class="widget widget_categories group">
                 <h3>Categories.</h3>
                 <ul>
-                    <li>Wordpress (2)</li>
-                    <li>Ghost (14)</li>
-                    <li>Joomla (5)</li>
-                    <li>Drupal (3)</li>
-                    <li>Magento (2)</li>
-                    <li>Uncategorized (9)</li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Wordpress">
+                            Wordpress
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Ghost">
+                            Ghost
+                        </a> (3)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Joomla">
+                            Joomla
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Drupal">
+                            Drupal
+                        </a> (1)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Magento">
+                            Magento
+                        </a> (0)
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:entries' %}?category=Uncategorized">
+                            Uncategorized
+                        </a> (0)
+                    </li>
                 </ul>
             </div>
 
@@ -196,18 +240,18 @@
                 <h3>Popular Post.</h3>
                 <ul class="link-list">
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Sint cillum consectetur voluptate.
+                        <a href="{% url 'blog:single' %}?post=1">
+                            Hey, We Love Open Sans!
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Lorem ipsum Ullamco commodo.
+                        <a href="{% url 'blog:single' %}?post=2">
+                            We All Love Good Typography.
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:single' %}">
-                            Fugiat minim eiusmod do.
+                        <a href="{% url 'blog:single' %}?post=3">
+                            White Space Everywhere.
                         </a>
                     </li>
                 </ul>
