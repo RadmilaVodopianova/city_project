@@ -9,4 +9,5 @@ urlpatterns = [
     path('weekdays/', include('weekdays.urls')),
 
     path('', include('city.urls')),
+    path("blog/", include("blog.urls")),
 ]

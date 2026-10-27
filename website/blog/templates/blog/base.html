@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Keep It Simple.{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static 'blog/css/default.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/media-queries.css' %}">
+
+    <script src="{% static 'blog/js/modernizr.js' %}"></script>
+
+    <link rel="shortcut icon" href="{% static 'blog/favicon.png' %}">
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+<header id="top">
+    <div class="row">
+        <div class="header-content twelve columns">
+            <h1 id="logo-text">
+                <a href="{% url 'blog:home' %}">Keep It Simple.</a>
+            </h1>
+            <p id="intro">Put your awesome slogan here...</p>
+        </div>
+    </div>
+
+    <nav id="nav-wrap">
+        <a class="mobile-btn" href="#nav-wrap"
+           title="Show navigation">Show Menu</a>
+        <a class="mobile-btn" href="#top"
+           title="Hide navigation">Hide Menu</a>
+
+        <div class="row">
+            <ul id="nav" class="nav">
+                <li{% if request.resolver_match.url_name == 'home' %} class="current"{% endif %}>
+                    <a href="{% url 'blog:home' %}">Home</a>
+                </li>
+
+                <li class="has-children">
+                    <a href="{% url 'blog:page' %}">Dropdown</a>
+                    <ul>
+                        <li>
+                            <a href="{% url 'blog:page' %}">About</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'blog:archives' %}">Archives</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'blog:demo' %}">Demo</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li{% if request.resolver_match.url_name == 'demo' %} class="current"{% endif %}>
+                    <a href="{% url 'blog:demo' %}">Demo</a>
+                </li>
+
+                <li{% if request.resolver_match.url_name == 'archives' %} class="current"{% endif %}>
+                    <a href="{% url 'blog:archives' %}">Archives</a>
+                </li>
+
+                <li class="has-children{% if request.resolver_match.url_name == 'entries' or request.resolver_match.url_name == 'single' %} current{% endif %}">
+                    <a href="{% url 'blog:entries' %}">Blog</a>
+                    <ul>
+                        <li>
+                            <a href="{% url 'blog:entries' %}">Blog Entries</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'blog:single' %}">Single Blog</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li{% if request.resolver_match.url_name == 'page' %} class="current"{% endif %}>
+                    <a href="{% url 'blog:page' %}">Page</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+    <div class="row">
+        <div class="six columns info">
+            <h3>About Keep It Simple</h3>
+            <p>
+                This is Photoshop's version of Lorem Ipsum.
+                Proin gravida nibh vel velit auctor aliquet.
+                Aenean sollicitudin, lorem quis bibendum auctor,
+                nisi elit consequat ipsum, nec sagittis sem nibh id elit.
+            </p>
+            <p>
+                Lorem ipsum Sed nulla deserunt voluptate elit occaecat
+                culpa cupidatat sit irure sint sint incididunt cupidatat
+                esse in Ut sed commodo tempor consequat culpa fugiat
+                incididunt.
+            </p>
+        </div>
+
+        <div class="four columns">
+            <h3>Photostream</h3>
+            <ul class="photostream group">
+                <li>
+                    <a href="{% static 'blog/images/thumb.jpg' %}">
+                        <img src="{% static 'blog/images/thumb.jpg' %}"
+                             alt="Thumbnail">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static 'blog/images/thumb.jpg' %}">
+                        <img src="{% static 'blog/images/thumb.jpg' %}"
+                             alt="Thumbnail">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static 'blog/images/thumb.jpg' %}">
+                        <img src="{% static 'blog/images/thumb.jpg' %}"
+                             alt="Thumbnail">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static 'blog/images/thumb.jpg' %}">
+                        <img src="{% static 'blog/images/thumb.jpg' %}"
+                             alt="Thumbnail">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static 'blog/images/thumb.jpg' %}">
+                        <img src="{% static 'blog/images/thumb.jpg' %}"
+                             alt="Thumbnail">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static 'blog/images/thumb.jpg' %}">
+                        <img src="{% static 'blog/images/thumb.jpg' %}"
+                             alt="Thumbnail">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static 'blog/images/thumb.jpg' %}">
+                        <img src="{% static 'blog/images/thumb.jpg' %}"
+                             alt="Thumbnail">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% static 'blog/images/thumb.jpg' %}">
+                        <img src="{% static 'blog/images/thumb.jpg' %}"
+                             alt="Thumbnail">
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="two columns">
+            <h3 class="social">Navigate</h3>
+            <ul class="navigate group">
+                <li><a href="{% url 'blog:home' %}">Home</a></li>
+                <li><a href="{% url 'blog:entries' %}">Blog</a></li>
+                <li><a href="{% url 'blog:demo' %}">Demo</a></li>
+                <li><a href="{% url 'blog:archives' %}">Archives</a></li>
+                <li><a href="{% url 'blog:page' %}">About</a></li>
+            </ul>
+        </div>
+
+        <p class="copyright">
+            &copy; Copyright 2014 Keep It Simple.
+            &nbsp; Design by
+            <a title="Styleshout"
+               href="https://www.styleshout.com/">Styleshout</a>.
+        </p>
+    </div>
+
+    <div id="go-top">
+        <a class="smoothscroll" title="Back to Top" href="#top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+</footer>
+
+<script src="{% static 'blog/js/jquery-1.10.2.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery-migrate-1.2.1.min.js' %}"></script>
+<script src="{% static 'blog/js/main.js' %}"></script>
+
+{% block extra_js %}
+{% endblock %}
+</body>
+</html>

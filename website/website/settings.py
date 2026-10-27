@@ -114,4 +114,5 @@ INSTALLED_APPS = [
     'sport',
     'cars',
     'weekdays',
+    'blog',
 ]
